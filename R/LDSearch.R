@@ -59,6 +59,7 @@ LDSearch <- function( SNPs,
   
   query <- paste( sep="", query_start, query_end )
   
+  cat("Querying SNAP...\n")
   dat <- getURL( query )
   
   ## search through for missing SNPs and remove them from output
@@ -67,7 +68,11 @@ LDSearch <- function( SNPs,
   for( line in warning_SNPs ) {
     cat( line, "\n" )
   }
-  tmp <- tmp[ -c( grep( "WARNING", tmp ) ) ]
+  
+  bad_lines <- grep( "WARNING", tmp )
+  if( length( bad_lines ) > 0 ) {
+    tmp <- tmp[ -bad_lines ]
+  }
   
   out <- SNAPR:::str_split( tmp, sep="\t", fixed=TRUE )
   names( out ) <- unlist( unclass( out[1,] ) )
@@ -78,6 +83,7 @@ LDSearch <- function( SNPs,
     rownames( out_split[[i]] ) <- 1:nrow( out_split[[i]] )
   }
   
+  cat("Querying NCBI for up-to-date position information...\n")
   ## query NCBI for additional SNP information
   SNP_info <- vector("list", length(out_split))
   for( i in 1:length(out_split) ) {
