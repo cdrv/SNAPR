@@ -16,7 +16,12 @@
 
   \item{panel}{The panel to use from the queried data set.
   Must be one of: \itemize{ \item{\code{CEU}}
-  \item{\code{YRI}} \item{\code{JPT+CHB}} }}
+  \item{\code{YRI}} \item{\code{JPT+CHB}} } If you are
+  working with \code{hapmap3r2}, you can choose the
+  additional panels: \itemize{ \item{\code{ASW}}
+  \item{\code{CHD}} \item{\code{GIH}} \item{\code{LWK}}
+  \item{\code{MEK}} \item{\code{MKK}} \item{\code{TSI}}
+  \item{\code{CEU+TSI}} \item{\code{JPT+CHB+CHD}} }}
 
   \item{RSquaredLimit}{The R Squared limit to specify as a
   filter for returned SNPs; that is, only SNP pairs with
@@ -28,12 +33,22 @@
   SNPs.}
 }
 \value{
-  A list of data.frames, one for each SNP queried,
+  A list of data frames, one for each SNP queried,
   containing information about the SNPs found to be in LD
   with that SNP.
 }
 \description{
   This function queries SNAP for SNPs in high linkage
   disequilibrium with a set of SNPs.
+}
+\details{
+  For more details, please see
+  \code{\link{http://www.broadinstitute.org/mpg/snap/ldsearch.php}.}
+
+  Information on the HapMap populations:
+  \code{\link{http://ccr.coriell.org/Sections/Collections/NHGRI/hapmap.aspx?PgId=266&coll=HG}}
+
+  Information on the 1000 Genomes populations:
+  \code{\link{http://www.1000genomes.org/category/frequently-asked-questions/population}}
 }
 

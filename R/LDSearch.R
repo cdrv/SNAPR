@@ -3,6 +3,16 @@
 #' This function queries SNAP for SNPs in high linkage disequilibrium with
 #' a set of SNPs.
 #' 
+#' For more details, please see 
+#' \code{\link{http://www.broadinstitute.org/mpg/snap/ldsearch.php}.}
+#' 
+#' Information on the HapMap populations:
+#' \code{\link{http://ccr.coriell.org/Sections/Collections/NHGRI/hapmap.aspx?PgId=266&coll=HG}}
+#' 
+#' Information on the 1000 Genomes populations:
+#' \code{\link{http://www.1000genomes.org/category/frequently-asked-questions/population}}
+#' 
+#' 
 #' @param SNPs A vector of SNPs (rs numbers).
 #' @param dataset The dataset to query. Must be one of: \itemize{
 #'   \item{\code{rel21: }}{HapMap Release 21}
@@ -16,12 +26,24 @@
 #'  \item{\code{YRI}}
 #'  \item{\code{JPT+CHB}}
 #'  }
+#' If you are working with \code{hapmap3r2}, you can choose
+#' the additional panels: \itemize{
+#'  \item{\code{ASW}}
+#'  \item{\code{CHD}}
+#'  \item{\code{GIH}}
+#'  \item{\code{LWK}}
+#'  \item{\code{MEK}}
+#'  \item{\code{MKK}}
+#'  \item{\code{TSI}}
+#'  \item{\code{CEU+TSI}}
+#'  \item{\code{JPT+CHB+CHD}}
+#'  }
 #' @param RSquaredLimit The R Squared limit to specify as a filter for returned
 #' SNPs; that is, only SNP pairs with R-squared greater than \code{RSquaredLimit}
 #' will be returned.
 #' @param distanceLimit The distance (in kilobases) upstream and downstream
 #' to search for SNPs in LD with each set of SNPs.
-#' @return A list of data.frames, one for each SNP queried, containing
+#' @return A list of data frames, one for each SNP queried, containing
 #' information about the SNPs found to be in LD with that SNP.
 #' @export
 LDSearch <- function( SNPs,
@@ -100,6 +122,7 @@ LDSearch <- function( SNPs,
       ]
   }
   
+  on.exit( cat("Done!\n") )
   return( out_split )
   
 }
