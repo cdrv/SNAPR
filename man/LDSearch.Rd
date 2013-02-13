@@ -51,4 +51,7 @@
   Information on the 1000 Genomes populations:
   \code{\link{http://www.1000genomes.org/category/frequently-asked-questions/population}}
 }
+\examples{
+\dontrun{LDSearch("rs429358")}
+}
 

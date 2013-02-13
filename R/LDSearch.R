@@ -45,6 +45,7 @@
 #' to search for SNPs in LD with each set of SNPs.
 #' @return A list of data frames, one for each SNP queried, containing
 #' information about the SNPs found to be in LD with that SNP.
+#' @examples \dontrun{LDSearch("rs429358")}
 #' @export
 LDSearch <- function( SNPs,
                       dataset="onekgpilot",
