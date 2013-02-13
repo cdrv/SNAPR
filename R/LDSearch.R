@@ -50,7 +50,7 @@ LDSearch <- function( SNPs,
                       dataset="onekgpilot",
                       panel="CEU",
                       RSquaredLimit=0.6,
-                      distanceLimit=10 ) {
+                      distanceLimit=500 ) {
   
   require( RCurl )
   require( NCBI2R )
