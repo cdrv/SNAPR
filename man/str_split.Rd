@@ -32,15 +32,6 @@
   primary bonus is the automatic coersion to a
   \code{data.frame}.
 }
-\examples{
-str_split(
-  c("regular_structure", "in_my", "data_here"),
-  sep="_",
-  names=c("apple", "banana")
-)
-x <- c("somewhat_different.structure", "in_this.guy")
-str_split( x, "[_\\\\.]" )
-}
 \seealso{
   \code{\link{strsplit}}
 }

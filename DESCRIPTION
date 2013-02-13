@@ -7,12 +7,12 @@ Date: 2013-02-13
 Author: Kevin Ushey
 Maintainer: Kevin Ushey <kevinushey@gmail.com>
 Description: This package provides an R interface to SNAP. See
-    http://www.broadinstitute.org/mpg/snap/index.php for more details.
+    \url{http://www.broadinstitute.org/mpg/snap/index.php} for more details.
 Depends:
     RCurl,
-    NCBI2R
+    XML
 License: GPL (>= 2)
 Collate:
     'LDSearch.R'
-    'str_split.R'
     'SNAPR.R'
+    'utils.R'

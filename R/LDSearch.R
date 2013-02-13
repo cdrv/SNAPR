@@ -4,14 +4,13 @@
 #' a set of SNPs.
 #' 
 #' For more details, please see 
-#' \code{\link{http://www.broadinstitute.org/mpg/snap/ldsearch.php}.}
+#' \url{http://www.broadinstitute.org/mpg/snap/ldsearch.php}.
 #' 
 #' Information on the HapMap populations:
-#' \code{\link{http://ccr.coriell.org/Sections/Collections/NHGRI/hapmap.aspx?PgId=266&coll=HG}}
+#' \url{http://ccr.coriell.org/Sections/Collections/NHGRI/hapmap.aspx?PgId=266&coll=HG}
 #' 
 #' Information on the 1000 Genomes populations:
-#' \code{\link{http://www.1000genomes.org/category/frequently-asked-questions/population}}
-#' 
+#' \url{http://www.1000genomes.org/category/frequently-asked-questions/population}
 #' 
 #' @param SNPs A vector of SNPs (rs numbers).
 #' @param dataset The dataset to query. Must be one of: \itemize{
@@ -67,7 +66,7 @@ LDSearch <- function( SNPs,
   }  
   
   require( RCurl )
-  require( NCBI2R )
+  require( XML )
   
   distanceLimit_bp <- as.integer( distanceLimit * 1E3 )
   
@@ -126,21 +125,32 @@ LDSearch <- function( SNPs,
   }
   
   cat("Querying NCBI for up-to-date position information...\n")
+  
   ## query NCBI for additional SNP information
   SNP_info <- vector("list", length(out_split))
-  for( i in 1:length(out_split) ) {
-    SNP_info[[i]] <- NCBI2R::GetSNPInfo( out_split[[i]]$Proxy )
-    out_split[[i]] <- merge( out_split[[i]], SNP_info[[i]], 
-                             by.x="Proxy", by.y="marker",
-                             all.x=TRUE )
+  
+  ## quick function for adding NCBI info to SNPs queried
+  add_ncbi_info <- function(x) {
+    ncbi_info <- SNAPR:::get_snp_info( x$Proxy )
+    x$ORDER <- 1:nrow(x)
+    x <- merge( x, ncbi_info, 
+                by.x="Proxy", by.y="marker",
+                all.x=TRUE
+    )
+    x <- x[ order( x$ORDER ), ]
+    x <- x[ !(names(x) %in% "ORDER") ]
+    x$Distance[ x$Distance == 0 ] <- NA
+    x$Distance <- x$pos - rep( x$pos[1], nrow(x) )
+    x <- x[ order( x$RSquared, decreasing=TRUE ), ]
+    
+    ## sleep a bit: maximum of 1 query per 3 seconds for NCBI
     Sys.sleep(3)
-    out_split[[i]]$Distance[ out_split[[i]]$Distance == 0 ] <- NA
-    out_split[[i]]$Distance <- 
-      rep( out_split[[i]]$chrpos[[1]], nrow(out_split[[i]]) ) - out_split[[i]]$chrpos
-    out_split[[i]] <- out_split[[i]][ 
-      order( out_split[[i]]$RSquared, decreasing=TRUE ), 
-      ]
+    
+    return(x)
+    
   }
+  
+  out_split <- lapply( out_split, add_ncbi_info )
   
   on.exit( cat("Done!\n") )
   return( out_split )

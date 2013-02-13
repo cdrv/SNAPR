@@ -43,13 +43,13 @@
 }
 \details{
   For more details, please see
-  \code{\link{http://www.broadinstitute.org/mpg/snap/ldsearch.php}.}
+  \url{http://www.broadinstitute.org/mpg/snap/ldsearch.php}.
 
   Information on the HapMap populations:
-  \code{\link{http://ccr.coriell.org/Sections/Collections/NHGRI/hapmap.aspx?PgId=266&coll=HG}}
+  \url{http://ccr.coriell.org/Sections/Collections/NHGRI/hapmap.aspx?PgId=266&coll=HG}
 
   Information on the 1000 Genomes populations:
-  \code{\link{http://www.1000genomes.org/category/frequently-asked-questions/population}}
+  \url{http://www.1000genomes.org/category/frequently-asked-questions/population}
 }
 \examples{
 \dontrun{LDSearch("rs429358")}
