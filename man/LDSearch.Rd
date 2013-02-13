@@ -3,7 +3,7 @@
 \title{Search for SNPs in LD with a set of SNPs}
 \usage{
   LDSearch(SNPs, dataset = "onekgpilot", panel = "CEU",
-    RSquaredLimit = 0.6, distanceLimit = 10)
+    RSquaredLimit = 0.8, distanceLimit = 500)
 }
 \arguments{
   \item{SNPs}{A vector of SNPs (rs numbers).}

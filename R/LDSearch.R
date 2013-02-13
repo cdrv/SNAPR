@@ -49,13 +49,26 @@
 LDSearch <- function( SNPs,
                       dataset="onekgpilot",
                       panel="CEU",
-                      RSquaredLimit=0.6,
+                      RSquaredLimit=0.8,
                       distanceLimit=500 ) {
+  
+  ## error checking
+  
+  ## RSquaredLimit
+  if( RSquaredLimit < 0 || RSquaredLimit > 1 ) {
+    stop("RSquaredLimit must be between 0 and 1")
+  }
+  
+  ## distanceLimit
+  valid_distances <- c(0, 10, 25, 50, 100, 250, 500)
+  if( !(distanceLimit %in% valid_distances) ) {
+    stop("invalid distanceLimit. distanceLimit must be one of: ", valid_distances)
+  }  
   
   require( RCurl )
   require( NCBI2R )
   
-  distanceLimit_bp <- distanceLimit * 1E3
+  distanceLimit_bp <- as.integer( distanceLimit * 1E3 )
   
   query_start <- "http://www.broadinstitute.org/mpg/snap/ldsearch.php?"
   SNP_query <- paste( sep="", "snpList=", paste(SNPs, collapse=",") )
@@ -83,6 +96,12 @@ LDSearch <- function( SNPs,
   
   cat("Querying SNAP...\n")
   dat <- getURL( query )
+  
+  ## check for validation error
+  if( length( grep( "validation error", dat ) ) > 0 ) {
+    cat(dat, sep="\n")
+    return( invisible(NULL) )
+  }
   
   ## search through for missing SNPs and remove them from output
   tmp <- unlist( strsplit( dat, "\r\n", fixed=TRUE ) )
