@@ -3,7 +3,7 @@ Type: Package
 Title: An R interface to the online LD tool SNAP (SNP Annotation and Proxy
     Search)
 Version: 0.1.0
-Date: 2013-02-13
+Date: 2013-02-24
 Author: Kevin Ushey
 Maintainer: Kevin Ushey <kevinushey@gmail.com>
 Description: This package provides an R interface to SNAP. See

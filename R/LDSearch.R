@@ -42,6 +42,8 @@
 #' will be returned.
 #' @param distanceLimit The distance (in kilobases) upstream and downstream
 #' to search for SNPs in LD with each set of SNPs.
+#' @param GeneCruiser boolean; if \code{TRUE} we attempt to get gene info through
+#' GeneCruiser for each SNP. This can slow the query down substantially.
 #' @return A list of data frames, one for each SNP queried, containing
 #' information about the SNPs found to be in LD with that SNP.
 #' @examples \dontrun{LDSearch("rs429358")}
@@ -50,7 +52,8 @@ LDSearch <- function( SNPs,
                       dataset="onekgpilot",
                       panel="CEU",
                       RSquaredLimit=0.8,
-                      distanceLimit=500 ) {
+                      distanceLimit=500,
+                      GeneCruiser=TRUE ) {
   
   ## error checking
   
@@ -77,7 +80,11 @@ LDSearch <- function( SNPs,
   RSquaredLimit_query <- paste( sep="", "RSquaredLimit=", RSquaredLimit )
   distanceLimit_query <- paste( sep="", "distanceLimit=", distanceLimit_bp )
   downloadType_query <- paste( sep="", "downloadType=file" )
-  columnList_query <- paste( sep="", "columnList[]=DP,GA,MAF")
+  if( GeneCruiser ) {
+    columnList_query <- paste( sep="", "columnList[]=DP,GA,MAF")
+  } else {
+    columnList_query <- paste( sep="", "columnList[]=DP,MAF")
+  }
   includeQuerySNP_query <- "includeQuerySnp=on"
   submit_query <- paste( sep="", "submit=search" )  
   

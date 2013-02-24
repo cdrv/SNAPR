@@ -3,7 +3,8 @@
 \title{Search for SNPs in LD with a set of SNPs}
 \usage{
   LDSearch(SNPs, dataset = "onekgpilot", panel = "CEU",
-    RSquaredLimit = 0.8, distanceLimit = 500)
+    RSquaredLimit = 0.8, distanceLimit = 500,
+    GeneCruiser = TRUE)
 }
 \arguments{
   \item{SNPs}{A vector of SNPs (rs numbers).}
@@ -31,6 +32,10 @@
   \item{distanceLimit}{The distance (in kilobases) upstream
   and downstream to search for SNPs in LD with each set of
   SNPs.}
+
+  \item{GeneCruiser}{boolean; if \code{TRUE} we attempt to
+  get gene info through GeneCruiser for each SNP. This can
+  slow the query down substantially.}
 }
 \value{
   A list of data frames, one for each SNP queried,
