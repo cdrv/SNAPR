@@ -57,6 +57,6 @@
   \url{http://www.1000genomes.org/category/frequently-asked-questions/population}
 }
 \examples{
-\dontrun{LDSearch("rs429358")}
+\dontrun{LDSearch("rs420358")}
 }
 

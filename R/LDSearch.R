@@ -46,7 +46,7 @@
 #' GeneCruiser for each SNP. This can slow the query down substantially.
 #' @return A list of data frames, one for each SNP queried, containing
 #' information about the SNPs found to be in LD with that SNP.
-#' @examples \dontrun{LDSearch("rs429358")}
+#' @examples \dontrun{LDSearch("rs420358")}
 #' @export
 LDSearch <- function( SNPs,
                       dataset="onekgpilot",
