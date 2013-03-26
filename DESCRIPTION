@@ -8,7 +8,7 @@ Author: Kevin Ushey
 Maintainer: Kevin Ushey <kevinushey@gmail.com>
 Description: This package provides an R interface to SNAP. See
     \url{http://www.broadinstitute.org/mpg/snap/index.php} for more details.
-Depends:
+Imports:
     RCurl,
     XML
 License: GPL (>= 2)

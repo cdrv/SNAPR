@@ -68,9 +68,6 @@ LDSearch <- function( SNPs,
     stop("invalid distanceLimit. distanceLimit must be one of: ", valid_distances)
   }  
   
-  require( RCurl )
-  require( XML )
-  
   distanceLimit_bp <- as.integer( distanceLimit * 1E3 )
   
   query_start <- "http://www.broadinstitute.org/mpg/snap/ldsearch.php?"

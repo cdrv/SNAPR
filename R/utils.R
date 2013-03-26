@@ -40,9 +40,6 @@ flip <- function( SNP, sep="", outSep=sep ) {
 #' @param SNPs A vector of SNPs (rs numbers).
 get_snp_info <- function(SNPs) {
   
-  require(RCurl)
-  require(XML)
-  
   ## Query the unmatched SNPs
   query <- "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=snp&mode=xml&id="
   query <- paste0( query, paste( SNPs, collapse="," ) )
